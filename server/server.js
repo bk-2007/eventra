@@ -28,16 +28,18 @@ app.get('/', (req, res) => {
 });
 
 // Database connection & listener
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/eventra';
+const PORT = process.env.PORT || 10000;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://balakrishnagorle2007_db_user:GFCzHLAdegKmaoOO@cluster0.w8tgz73.mongodb.net/eventra?retryWrites=true&w=majority&appName=Cluster0';
+
+// Start the Express server immediately so that Render's port detection passes right away
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
+});
 
 mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log('Successfully connected to MongoDB database.');
-    app.listen(PORT, () => {
-      console.log(`Express server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err);
